@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class PlatfromController : MonoBehaviour
 {
-    private Rigidbody platformBody;
+    private Rigidbody2D platformBody;
+    [Tooltip("To set the speed of the platform")]
     [SerializeField] private float platformSpeed;
+    [Tooltip("To set the angle limits of the platform.")]
     [SerializeField] private float maxRotation;
     void Start()
     {
-        platformBody = GetComponent<Rigidbody>();
+        platformBody = GetComponent<Rigidbody2D>();
     }
 
     void FixedUpdate()
@@ -21,7 +23,6 @@ public class PlatfromController : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(transform.rotation.eulerAngles.z);
         if (Input.GetKey(KeyCode.Q))
         {
             transform.Rotate(Vector3.forward * 5 * Time.deltaTime);
