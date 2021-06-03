@@ -9,6 +9,11 @@ public class PlatfromController : MonoBehaviour
     [SerializeField] private float platformSpeed;
     [Tooltip("To set the angle limits of the platform.")]
     [SerializeField] private float maxRotation;
+    [Tooltip("Left transform to rotate around.")]
+    [SerializeField] private Transform leftEnd;
+    [Tooltip("Right transform to rotate around.")]
+    [SerializeField] private Transform rightEnd;
+
     void Start()
     {
         platformBody = GetComponent<Rigidbody2D>();
@@ -23,14 +28,15 @@ public class PlatfromController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Q))
-        {
-            transform.Rotate(Vector3.forward * 5 * Time.deltaTime);
-        }
 
         if (Input.GetKey(KeyCode.E))
         {
-            transform.Rotate(-Vector3.forward * 5 * Time.deltaTime);
+            transform.RotateAround(leftEnd.position, Vector3.forward, 20 * Time.deltaTime);
+        }
+
+        if (Input.GetKey(KeyCode.Q))
+        {
+            transform.RotateAround(rightEnd.position, -Vector3.forward, 20 * Time.deltaTime);
         }
 
     }

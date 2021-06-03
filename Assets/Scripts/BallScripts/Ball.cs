@@ -4,13 +4,12 @@ using UnityEngine;
 
 public class Ball : MonoBehaviour
 {
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        Debug.Log(collision.transform.tag);
-    }
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log(collision.transform.tag);
+        if(collision.transform.tag == "Hole")
+        {
+            Debug.Log(collision.transform.tag);
+        }
+        
     }
 }
