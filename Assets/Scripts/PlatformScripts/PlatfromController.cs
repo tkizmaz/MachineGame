@@ -31,13 +31,22 @@ public class PlatfromController : MonoBehaviour
 
         if (Input.GetKey(KeyCode.E))
         {
-            transform.RotateAround(leftEnd.position, Vector3.forward, 20 * Time.deltaTime);
+            if (rightEnd.position.y - leftEnd.position.y <= maxRotation)
+            {
+                transform.RotateAround(leftEnd.position, Vector3.forward, 20 * Time.deltaTime);
+            }
+            
         }
 
         if (Input.GetKey(KeyCode.Q))
         {
-            transform.RotateAround(rightEnd.position, -Vector3.forward, 20 * Time.deltaTime);
+            if (leftEnd.position.y - rightEnd.position.y <= maxRotation)
+            {
+                transform.RotateAround(rightEnd.position, -Vector3.forward, 20 * Time.deltaTime);
+            }
+            
         }
 
     }
+
 }
