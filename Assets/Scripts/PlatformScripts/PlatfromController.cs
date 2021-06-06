@@ -21,6 +21,7 @@ public class PlatfromController : MonoBehaviour
 
     void FixedUpdate()
     {
+
         float yAxis = Input.GetAxis("Vertical");
         platformBody.velocity = new Vector3(0, yAxis * platformSpeed, 0);
 
@@ -33,7 +34,7 @@ public class PlatfromController : MonoBehaviour
         {
             if (rightEnd.position.y - leftEnd.position.y <= maxRotation)
             {
-                transform.RotateAround(leftEnd.position, Vector3.forward, 20 * Time.deltaTime);
+                transform.RotateAround(leftEnd.position, Vector3.forward, 10 * Time.deltaTime);
             }
             
         }
@@ -42,7 +43,7 @@ public class PlatfromController : MonoBehaviour
         {
             if (leftEnd.position.y - rightEnd.position.y <= maxRotation)
             {
-                transform.RotateAround(rightEnd.position, -Vector3.forward, 20 * Time.deltaTime);
+                transform.RotateAround(rightEnd.position, -Vector3.forward, 10 * Time.deltaTime);
             }
             
         }
