@@ -7,6 +7,8 @@ public class Ball : MonoBehaviour
     private bool isTriggering;
     private GameObject targetHole;
     private CircleCollider2D ballCollider;
+    public static System.Action<GameObject> CollisionEvent;
+    public static System.Action GameOver;
 
     private void Start()
     {
@@ -55,15 +57,13 @@ public class Ball : MonoBehaviour
             //Checking if all points of the ball is in hole
             if (ballIsInside(targetHole.GetComponent<CircleCollider2D>()) && !targetHole.GetComponent<Hole>().getIsTarget())
             {
-                Destroy(gameObject);
+                GameOver();
             }
 
             else if(ballIsInside(targetHole.GetComponent<CircleCollider2D>()) && targetHole.GetComponent<Hole>().getIsTarget())
             {
-                Destroy(gameObject);
-                UIManager.instance.UpdateScoreText();
-                UIManager.instance.UpdateStrikeText();
-                TimeController.instance.setTime(15f);
+                CollisionEvent(this.gameObject);
+                
             }
         }
     }

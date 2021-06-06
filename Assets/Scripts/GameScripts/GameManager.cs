@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
@@ -13,6 +13,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        Ball.CollisionEvent += ResetGame;
+        Ball.GameOver += FinishGame;
         SelectRandomHole();
     }
 
@@ -28,6 +30,18 @@ public class GameManager : MonoBehaviour
         int holeCount = holeArray.Length;
         int randomToChoose = (Random.Range(0, holeCount));
         SetSelectedHole(holeArray[randomToChoose]);
+    }
+
+    private void ResetGame(GameObject ballObject)
+    {
+        Destroy(ballObject);
+        TimeController.instance.setTime(15f);
+        ScoreManager.instance.incrementScore(10);
+    }
+
+    private void FinishGame()
+    {
+        SceneManager.LoadScene("MainGame");
     }
 
 }

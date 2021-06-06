@@ -6,33 +6,29 @@ public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
     [SerializeField] private Text scoreText;
-    [SerializeField] private Text strikeText;
+    [SerializeField] private Text highScoreText;
     [SerializeField] private Text timeText;
-    private int score;
-    private int strike;
 
     private void Awake()
     {
         instance = this;
     }
 
-    public void UpdateScoreText()
+    public void UpdateScoreText(int score)
     {
-        score += 50;
         scoreText.text = score.ToString();
     }
 
-    public void UpdateStrikeText()
-    {
-        strike += 1;
-        strikeText.text = strike.ToString();
-    }
 
     private void UpdateTimeText()
     {
         timeText.text = TimeController.instance.getTime().ToString();
     }
 
+    public void UpdateHighScoreText(int highScore)
+    {
+        highScoreText.text = highScore.ToString();
+    }
 
     private void Start()
     {
