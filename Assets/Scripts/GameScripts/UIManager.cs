@@ -39,6 +39,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         TimeController.instance.BeginCountdown();
+        //remove from update.
         UpdateTimeText();
     }
 }

@@ -72,7 +72,7 @@ public class Ball : MonoBehaviour
 
             else if(ballIsInside(targetHole.GetComponent<CircleCollider2D>()) && targetHole.GetComponent<Hole>().getIsTarget())
             {
-                CollisionEvent(this.gameObject);
+                CollisionEvent?.Invoke(this.gameObject);
                 
             }
         }

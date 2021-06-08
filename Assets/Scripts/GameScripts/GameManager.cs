@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
-    [SerializeField] private GameObject platform;
+    [SerializeField] private Platform platform;
     private Hole selectedHole;
 
     private void Awake()
@@ -18,6 +18,12 @@ public class GameManager : MonoBehaviour
         Ball.CollisionEvent += ResetGame;
         Ball.GameOver += FinishGame;
         SelectRandomHole();
+    }
+
+    private void OnDestroy()
+    {
+        Ball.CollisionEvent -= ResetGame;
+        Ball.GameOver -= FinishGame;
     }
 
     public void SetSelectedHole()
@@ -45,7 +51,7 @@ public class GameManager : MonoBehaviour
     private void ResetGame(GameObject ballObject)
     {
         ballObject.SetActive(false);
-        platform.GetComponent<Platform>().ResetTransform();
+        platform.ResetTransform();
         ballObject.GetComponent<Ball>().ResetTransform();
         ResetSelectedHole();
         SelectRandomHole();
@@ -68,5 +74,4 @@ public class GameManager : MonoBehaviour
         }
 
     }
-
 }
