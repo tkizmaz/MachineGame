@@ -9,10 +9,20 @@ public class Ball : MonoBehaviour
     private CircleCollider2D ballCollider;
     public static System.Action<GameObject> CollisionEvent;
     public static System.Action GameOver;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
 
     private void Start()
     {
         ballCollider = this.gameObject.GetComponent<CircleCollider2D>();
+        initialPosition = this.transform.position;
+        initialRotation = this.transform.rotation;
+    }
+
+    public void ResetTransform()
+    {
+        this.transform.position = initialPosition;
+        this.transform.rotation = initialRotation;
     }
 
     bool ballIsInside(CircleCollider2D holeCollider)

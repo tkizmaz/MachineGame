@@ -5,6 +5,8 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    [SerializeField] private GameObject platform;
+    private Hole selectedHole;
 
     private void Awake()
     {
@@ -18,10 +20,17 @@ public class GameManager : MonoBehaviour
         SelectRandomHole();
     }
 
-    public void SetSelectedHole(Hole selectedHole)
+    public void SetSelectedHole()
     {
-        selectedHole.gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
-        selectedHole.setIsTarget();
+        this.selectedHole.gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
+        this.selectedHole.setIsTarget(true);
+    }
+
+    public void ResetSelectedHole()
+    {
+        this.selectedHole.setIsTarget(false);
+        this.selectedHole.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
+        this.selectedHole = null;
     }
 
     public void SelectRandomHole()
@@ -29,12 +38,18 @@ public class GameManager : MonoBehaviour
         Hole[] holeArray = Object.FindObjectsOfType<Hole>();
         int holeCount = holeArray.Length;
         int randomToChoose = (Random.Range(0, holeCount));
-        SetSelectedHole(holeArray[randomToChoose]);
+        this.selectedHole = holeArray[randomToChoose];
+        SetSelectedHole();
     }
 
     private void ResetGame(GameObject ballObject)
     {
-        Destroy(ballObject);
+        ballObject.SetActive(false);
+        platform.GetComponent<Platform>().ResetTransform();
+        ballObject.GetComponent<Ball>().ResetTransform();
+        ResetSelectedHole();
+        SelectRandomHole();
+        ballObject.SetActive(true);
         TimeController.instance.setTime(15f);
         ScoreManager.instance.incrementScore(10);
     }
@@ -42,6 +57,16 @@ public class GameManager : MonoBehaviour
     private void FinishGame()
     {
         SceneManager.LoadScene("MainGame");
+    }
+
+    private void Update()
+    {
+        int timeRemaining = TimeController.instance.getTime();
+        if(timeRemaining <= 0)
+        {
+            FinishGame();
+        }
+
     }
 
 }

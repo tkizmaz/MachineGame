@@ -17,16 +17,19 @@ public class ScoreManager : MonoBehaviour
     public void incrementScore(int score)
     {
         this.score += score;
-        UIManager.instance.UpdateScoreText(score);
+        UIManager.instance.UpdateScoreText(this.score);
+    }
+
+    private void Start()
+    {
+        this.score = 0;
+        this.highScore = PlayerPrefs.GetInt("High Score", this.highScore);
+        UIManager.instance.UpdateHighScoreText(this.highScore);
     }
 
     private void Awake()
     {
         instance = this;
-        this.score = 0;
-        this.highScore = PlayerPrefs.GetInt("High Score", this.highScore);
-        UIManager.instance.UpdateHighScoreText(this.highScore);
-
     }
 
     // Update is called once per frame

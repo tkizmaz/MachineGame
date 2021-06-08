@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlatfromController : MonoBehaviour
+public class Platform : MonoBehaviour
 {
     private Rigidbody2D platformBody;
     [Tooltip("To set the speed of the platform")]
@@ -13,10 +13,20 @@ public class PlatfromController : MonoBehaviour
     [SerializeField] private Transform leftEnd;
     [Tooltip("Right transform to rotate around.")]
     [SerializeField] private Transform rightEnd;
+    private Vector3 initialPosition;
+    private Quaternion initialRotation;
 
     void Start()
     {
         platformBody = GetComponent<Rigidbody2D>();
+        initialPosition = this.transform.position;
+        initialRotation = this.transform.rotation;
+    }
+
+    public void ResetTransform()
+    {
+        this.transform.position = initialPosition;
+        this.transform.rotation = initialRotation;
     }
 
     void FixedUpdate()

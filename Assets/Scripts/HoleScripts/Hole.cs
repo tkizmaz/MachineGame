@@ -7,9 +7,9 @@ public class Hole : MonoBehaviour
     // Start is called before the first frame update
     private bool isTarget;
     
-    public void setIsTarget()
+    public void setIsTarget(bool isSelected)
     {
-        this.isTarget = true;
+        this.isTarget = isSelected;
     }
 
     public bool getIsTarget()
