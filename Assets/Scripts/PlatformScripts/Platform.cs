@@ -15,6 +15,8 @@ public class Platform : MonoBehaviour
     [SerializeField] private Transform rightEnd;
     private Vector3 initialPosition;
     private Quaternion initialRotation;
+    private Vector3 startTouchPosition;
+    private Vector3 currentPosition;
 
     void Start()
     {
@@ -37,27 +39,19 @@ public class Platform : MonoBehaviour
 
     }
 
-    private void Update()
+    public Transform GetLeftEnd()
     {
+        return leftEnd;
+    }
 
-        if (Input.GetKey(KeyCode.E))
-        {
-            if (rightEnd.position.y - leftEnd.position.y <= maxRotation)
-            {
-                transform.RotateAround(leftEnd.position, Vector3.forward, 10 * Time.deltaTime);
-            }
-            
-        }
+    public Transform GetRightEnd()
+    {
+        return rightEnd;
+    }
 
-        if (Input.GetKey(KeyCode.Q))
-        {
-            if (leftEnd.position.y - rightEnd.position.y <= maxRotation)
-            {
-                transform.RotateAround(rightEnd.position, -Vector3.forward, 10 * Time.deltaTime);
-            }
-            
-        }
-
+    public float GetMaxRotation()
+    {
+        return maxRotation;
     }
 
 }
