@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     [SerializeField] private Platform platform;
     private Hole selectedHole;
-    [SerializeField] private List<Level> levelPool;
 
     private void Awake()
     {
