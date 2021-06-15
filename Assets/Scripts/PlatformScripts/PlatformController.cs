@@ -17,6 +17,19 @@ public class PlatformController : MonoBehaviour
         return 1;
     }
 
+    private bool isLeft(float xTouchPosition)
+    {
+        float leftEndXPosition = platform.GetLeftEnd().position.x;
+        float rightEndXPosition = platform.GetRightEnd().position.x;
+
+        if(Mathf.Abs(xTouchPosition - leftEndXPosition) < Mathf.Abs(xTouchPosition - rightEndXPosition)){
+            return true;
+        }
+
+        return false;
+    }
+
+
     void Update()
     {
 
@@ -26,7 +39,7 @@ public class PlatformController : MonoBehaviour
             {
                 if(Input.GetTouch(i).phase == TouchPhase.Began)
                 {
-                    startingPositions[Input.GetTouch(i).fingerId]= Input.GetTouch(i).position;
+                    startingPositions[Input.GetTouch(i).fingerId]= Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position);
                 }
 
                 if (Input.GetTouch(i).phase == TouchPhase.Moved)
@@ -35,7 +48,8 @@ public class PlatformController : MonoBehaviour
                     int direction = FindRotationDirection(yDistance);
                     float differenceBetweenEndsForLeft = platform.GetLeftEnd().position.y - platform.GetRightEnd().position.y;
                     float differenceBetweenEndsForRight = platform.GetRightEnd().position.y - platform.GetLeftEnd().position.y;
-                    if (startingPositions[Input.GetTouch(i).fingerId].x <= 500f)
+    
+                    if (isLeft(startingPositions[Input.GetTouch(i).fingerId].x))
                     {
                         if(direction > 0)
                         {

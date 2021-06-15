@@ -1,0 +1,21 @@
+{
+    "levels":[
+        {
+            "levelID" : 1,
+            "levelDifficulty" : "easy",
+            "timeLimit" : 60
+        },
+        
+        {
+            "levelID":2,
+            "levelDifficulty" : "easy",
+            "timeLimit" : 60
+            
+        }
+        
+        
+        
+        ]
+
+
+}

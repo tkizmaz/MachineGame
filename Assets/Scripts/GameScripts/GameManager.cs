@@ -7,6 +7,12 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
     [SerializeField] private Platform platform;
     private Hole selectedHole;
+    private List<Level> levelList;
+
+    public void SetLevelList(List<Level> levelList)
+    {
+        this.levelList = levelList;
+    }
 
     private void Awake()
     {
@@ -61,6 +67,11 @@ public class GameManager : MonoBehaviour
     }
 
     private void FinishGame()
+    {
+        SceneManager.LoadScene("MainGame");
+    }
+
+    public void StartGame()
     {
         SceneManager.LoadScene("MainGame");
     }
