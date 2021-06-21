@@ -18,9 +18,22 @@ public class Level
 
     public GameObject GetSelectedHole()
     {
-        GameObject[] holesByDifficulty = GameObject.FindGameObjectsWithTag(this.levelDifficulty);
-        GameObject selectedHoleByDifficulty = holesByDifficulty[Random.Range(0, holesByDifficulty.Length)];
-        return selectedHoleByDifficulty;
+        if(levelDifficulty == "Easy")
+        {
+            selectedHole = HoleHolder.instance.FindEasyHole();
+        }
+
+        else if(levelDifficulty == "Medium")
+        {
+            selectedHole = HoleHolder.instance.FindMediumHole();
+        }
+
+        else
+        {
+            selectedHole = HoleHolder.instance.FindHardHole();
+        }
+
+        return selectedHole;
     }
 
 }

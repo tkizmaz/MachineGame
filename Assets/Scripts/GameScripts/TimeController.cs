@@ -19,7 +19,7 @@ public class TimeController : MonoBehaviour
 
     public void setTime(float time)
     {
-        this.time += time;
+        this.time = time;
     }
 
     public void BeginCountdown()

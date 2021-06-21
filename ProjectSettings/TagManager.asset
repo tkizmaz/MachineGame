@@ -8,6 +8,8 @@ TagManager:
   - Ball
   - Platform
   - Easy
+  - Medium
+  - Hard
   layers:
   - Default
   - TransparentFX

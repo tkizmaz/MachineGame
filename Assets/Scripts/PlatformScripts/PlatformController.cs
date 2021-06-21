@@ -44,7 +44,7 @@ public class PlatformController : MonoBehaviour
 
                 if (Input.GetTouch(i).phase == TouchPhase.Moved)
                 {
-                    float yDistance = startingPositions[Input.GetTouch(i).fingerId].y - Input.GetTouch(i).position.y;
+                    float yDistance = startingPositions[Input.GetTouch(i).fingerId].y - Camera.main.ScreenToWorldPoint(Input.GetTouch(i).position).y;
                     int direction = FindRotationDirection(yDistance);
                     float differenceBetweenEndsForLeft = platform.GetLeftEnd().position.y - platform.GetRightEnd().position.y;
                     float differenceBetweenEndsForRight = platform.GetRightEnd().position.y - platform.GetLeftEnd().position.y;

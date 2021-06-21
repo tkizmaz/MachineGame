@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
-    public static ScoreManager instance;
+    /*public static ScoreManager instance;
     private int score;
     private int highScore;
     // Start is called before the first frame update
@@ -12,12 +12,6 @@ public class ScoreManager : MonoBehaviour
     public int getScore()
     {
         return this.score;
-    }
-
-    public void incrementScore(int score)
-    {
-        this.score += score;
-        UIManager.instance.UpdateScoreText(this.score);
     }
 
     private void Start()
@@ -42,5 +36,5 @@ public class ScoreManager : MonoBehaviour
             PlayerPrefs.SetInt("High Score", highScore);
             PlayerPrefs.Save();
         }
-    }
+    }*/
 }

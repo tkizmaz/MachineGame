@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Platform platform;
     private Hole selectedHole;
     private List<Level> levelList;
+    private int levelNumber;
 
     public void SetLevelList(List<Level> levelList)
     {
@@ -21,9 +22,13 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
+        levelNumber = 0;
         Ball.CollisionEvent += ResetGame;
         Ball.GameOver += FinishGame;
-        SelectRandomHole();
+        SetLevelList(LevelManager.instance.GetLevelList());
+        SetSelectedHole();
+        UIManager.instance.UpdateLevelText(levelList[levelNumber].levelID);
+        Debug.Log(levelList.Count);
     }
 
     private void OnDestroy()
@@ -32,38 +37,31 @@ public class GameManager : MonoBehaviour
         Ball.GameOver -= FinishGame;
     }
 
-    public void SetSelectedHole()
+    private void SetSelectedHole()
     {
+        this.selectedHole = levelList[levelNumber].GetSelectedHole().GetComponent<Hole>();
         this.selectedHole.gameObject.GetComponent<SpriteRenderer>().color = Color.yellow;
         this.selectedHole.setIsTarget(true);
     }
 
-    public void ResetSelectedHole()
+    private void ResetSelectedHole()
     {
         this.selectedHole.setIsTarget(false);
         this.selectedHole.gameObject.GetComponent<SpriteRenderer>().color = Color.white;
         this.selectedHole = null;
     }
 
-    public void SelectRandomHole()
-    {
-        Hole[] holeArray = Object.FindObjectsOfType<Hole>();
-        int holeCount = holeArray.Length;
-        int randomToChoose = (Random.Range(0, holeCount));
-        this.selectedHole = holeArray[randomToChoose];
-        SetSelectedHole();
-    }
-
     private void ResetGame(GameObject ballObject)
     {
+        levelNumber++;
         ballObject.SetActive(false);
         platform.ResetTransform();
         ballObject.GetComponent<Ball>().ResetTransform();
-        ResetSelectedHole();
-        SelectRandomHole();
         ballObject.SetActive(true);
-        TimeController.instance.setTime(15f);
-        ScoreManager.instance.incrementScore(10);
+        ResetSelectedHole();
+        SetSelectedHole();
+        TimeController.instance.setTime(LevelManager.instance.GetLevelList()[levelNumber].timeLimit);
+        UIManager.instance.UpdateLevelText(levelList[levelNumber].levelID);
     }
 
     private void FinishGame()

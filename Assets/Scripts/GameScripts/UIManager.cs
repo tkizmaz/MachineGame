@@ -5,8 +5,7 @@ using UnityEngine.UI;
 public class UIManager : MonoBehaviour
 {
     public static UIManager instance;
-    [SerializeField] private Text scoreText;
-    [SerializeField] private Text highScoreText;
+    [SerializeField] private Text levelText;
     [SerializeField] private Text timeText;
 
     private void Awake()
@@ -14,20 +13,15 @@ public class UIManager : MonoBehaviour
         instance = this;
     }
 
-    public void UpdateScoreText(int score)
-    {
-        scoreText.text = score.ToString();
-    }
-
-
     private void UpdateTimeText()
     {
         timeText.text = TimeController.instance.getTime().ToString();
     }
 
-    public void UpdateHighScoreText(int highScore)
+    public void UpdateLevelText(int level)
     {
-        highScoreText.text = highScore.ToString();
+        Debug.Log(level);
+        levelText.text = level.ToString();
     }
 
     private void Start()
