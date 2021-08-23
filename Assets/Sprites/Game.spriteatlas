@@ -61,6 +61,7 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 958f4210d5bfa2a4c8aa89afbece74c5, type: 3}
   - {fileID: 21300000, guid: cabe5951a2ddc8548b3fdf34c225f630, type: 3}
   - {fileID: 21300000, guid: 2ebeb603196a6884385344ad323e2451, type: 3}
+  - {fileID: 21300000, guid: ea92b154817eaff409bbc37d7fd298c4, type: 3}
   - {fileID: 21300000, guid: b2277ef46190c0d4cb19e673e80db23d, type: 3}
   - {fileID: 21300000, guid: f0ec3f462ac29734ba5b6c7219dc1ec0, type: 3}
   - {fileID: 21300000, guid: f71e960a5d723e04ea5051e12964cc5c, type: 3}
@@ -75,6 +76,7 @@ SpriteAtlas:
   - Hole-Border-Shine
   - Hole-Border
   - Ball-Shadow
+  - Hole-Border-Shine-v2
   - Rod-Holder-Left
   - Hole-Background
   - Background
